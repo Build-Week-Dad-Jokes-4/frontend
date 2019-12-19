@@ -1,6 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import Login from './components/Login'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Login from './components/Login';
+import PrivateRoute from './components/PrivateRoute';
+import Dashboard from './components/Dashboard';
 import './App.css';
 
 function App() {
@@ -9,7 +11,8 @@ function App() {
       <div className="App">
         <h1>Dad Jokes 4.0</h1>
         <Switch>
-          <Route path="/login" component={Login} /> 
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <Route path="/login" component={Login} />
         </Switch>
       </div>
     </Router>
