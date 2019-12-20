@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const Login = props => {
+  // const proxy = 'https://cors-anywhere.herokuapp.com/';
+  // const url = 'https://be-dad-jokes.herokuapp.com/api/auth/login';
   const [credentials, setCredentials] = useState({
     username: '',
     password: ''
@@ -16,12 +18,16 @@ const Login = props => {
 
   const login = e => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/login', credentials).then(res => {
-      localStorage.setItem('token', res.data.payload);
-      props.history.push('/dashboard');
-    });
+    axios
+      .post('https://be-dad-jokes.herokuapp.com/api/auth/login', credentials)
+      .then(res => {
+        localStorage.setItem('token', res.data.payload);
+        console.log(res);
+        props.history.push('/dashboard');
+      })
+      .catch(err => console.log(err));
   };
-
+  console.log(credentials)
   return (
     <>
       <h2>Welcome to the Login Page</h2>
