@@ -21,7 +21,7 @@ const Login = props => {
     axios
       .post('https://be-dad-jokes.herokuapp.com/api/auth/login', credentials)
       .then(res => {
-        localStorage.setItem('token', res.data.payload);
+        localStorage.setItem('token', res.data.token);
         console.log(res);
         props.history.push('/dashboard');
       })
