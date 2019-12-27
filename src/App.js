@@ -5,11 +5,13 @@ import Register from './components/Register';
 import PrivateRoute from './components/PrivateRoute';
 import Dashboard from './components/Dashboard';
 import './App.css';
+import Header from './components/Header';
 
 function App() {
   return (
     <Router>
       <div className="App">
+        <Header />
         <h1>Dad Jokes 4.0</h1>
         <Switch>
           <PrivateRoute exact path="/dashboard" component={Dashboard} />

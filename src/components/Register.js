@@ -22,7 +22,7 @@ const Register = props => {
     axios
       .post('https://be-dad-jokes.herokuapp.com/api/auth/register', register)
       .then(res => {
-        console.log(res);
+        console.log('Register', res);
         localStorage.setItem('token', res.data.password);
         props.history.push('/dashboard');
       })

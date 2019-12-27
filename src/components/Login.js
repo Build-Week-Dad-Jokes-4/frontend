@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+// import { axiosWithAuth } from '../axiosWithAuth'
 
 const Login = props => {
   // const proxy = 'https://cors-anywhere.herokuapp.com/';
@@ -19,10 +20,11 @@ const Login = props => {
   const login = e => {
     e.preventDefault();
     axios
+    // axiosWithAuth()
       .post('https://be-dad-jokes.herokuapp.com/api/auth/login', credentials)
       .then(res => {
         localStorage.setItem('token', res.data.token);
-        console.log(res);
+        console.log('Login', res);
         props.history.push('/dashboard');
       })
       .catch(err => console.log(err));

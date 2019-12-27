@@ -9,13 +9,13 @@ const Dashboard = props => {
     axiosWithAuth()
       .get('https://be-dad-jokes.herokuapp.com/api/jokes')
       .then(res => {
-        console.log(res)
+        console.log('Dashboard res', res)
         setJokes(res.data)
       })
       .catch(err => console.log(err));
   }, []);
 
-  console.log(jokes);
+  console.log('List of jokes', jokes);
   return (
     <>
       <h2>Dashboard Page</h2>
