@@ -22,8 +22,9 @@ const Register = props => {
     axios
       .post('https://be-dad-jokes.herokuapp.com/api/auth/register', register)
       .then(res => {
-        console.log(res);
-        localStorage.setItem('token', res.data.password)
+        console.log('Register', res);
+        localStorage.setItem('token', res.data.password);
+        props.history.push('/dashboard');
       })
       .catch(err => console.log(err));
   };
