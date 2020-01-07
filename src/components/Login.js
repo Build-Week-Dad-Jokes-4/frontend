@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
-// import { axiosWithAuth } from '../axiosWithAuth'
+
+// Contexts
+import { LoginContext } from '../contexts/LoginContext';
 
 const Login = props => {
-  // const proxy = 'https://cors-anywhere.herokuapp.com/';
-  // const url = 'https://be-dad-jokes.herokuapp.com/api/auth/login';
-  const [credentials, setCredentials] = useState({
-    username: '',
-    password: ''
-  });
+  const { credentials, setCredentials } = useContext(LoginContext);
 
   const handleChange = e => {
     setCredentials({
@@ -20,16 +17,16 @@ const Login = props => {
   const login = e => {
     e.preventDefault();
     axios
-    // axiosWithAuth()
       .post('https://be-dad-jokes.herokuapp.com/api/auth/login', credentials)
       .then(res => {
         localStorage.setItem('token', res.data.token);
-        console.log('Login', res);
+        localStorage.setItem('user_id', credentials.username);
+        setCredentials({ username: '', password: '' });
         props.history.push('/dashboard');
       })
       .catch(err => console.log(err));
   };
-  console.log(credentials)
+
   return (
     <>
       <h2>Welcome to the Login Page</h2>
