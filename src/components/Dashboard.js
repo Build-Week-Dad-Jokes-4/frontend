@@ -10,19 +10,9 @@ import { JokeContext } from '../contexts/JokeContext';
 // Authentication
 import { axiosWithAuth } from '../axiosWithAuth';
 
-const initialJoke = {
-  joke: '',
-  punchline: '',
-  private: false,
-  public: false,
-  user_id: null
-};
-
 const Dashboard = props => {
-  // const { credentials } = useContext(LoginContext);
   const user_id = localStorage.getItem('user_id');
   const { jokes, setJokes } = useContext(JokeContext);
-  const [editing, setEditing] = useState(false);
   const [jokeToAdd, setJokeToAdd] = useState({
     joke: '',
     punchline: '',
@@ -30,14 +20,13 @@ const Dashboard = props => {
     public: false,
     user_id: null
   });
-  const [jokeToEdit, setJokeToEdit] = useState({});
 
   useEffect(() => {
     axiosWithAuth()
       .get('https://be-dad-jokes.herokuapp.com/api/jokes')
       .then(res => {
-        console.log('Dashboard res', res);
-        setJokes(res.data);
+        console.log('Dashboard res', res.data);
+        setJokes(res.data.sort((a, b) => parseFloat(a.id) - parseFloat(b.id)));
       })
       .catch(err => console.log(err));
   }, [setJokes]);
@@ -58,35 +47,6 @@ const Dashboard = props => {
       .catch(err => console.log(err));
   };
 
-  const editJoke = joke => {
-    setEditing(true);
-    setJokeToEdit(joke);
-  };
-
-  const saveEdit = e => {
-    e.preventDefault();
-
-    axiosWithAuth()
-      .put(
-        `https://be-dad-jokes.herokuapp.com/api/jokes/update/${jokeToEdit.id}`,
-        jokeToEdit
-      )
-      .then(res => {
-        console.log('editJoke res', res.data[0]);
-        const filterEditJoke = jokes.filter(joke => joke.id !== res.data[0].id);
-        console.log('editJoke filterEditJoke', filterEditJoke);
-        setJokes(
-          [...filterEditJoke, res.data[0]].sort(
-            (a, b) => parseFloat(a.id) - parseFloat(b.id)
-          )
-        );
-        setJokeToEdit({ joke: '', punchline: '' });
-        setEditing(false);
-        // props.history.push('/protected')
-      })
-      .catch(err => console.log(err));
-  };
-
   const deleteJoke = id => {
     axiosWithAuth()
       .delete(`https://be-dad-jokes.herokuapp.com/api/jokes/delete/${id}`)
@@ -103,45 +63,10 @@ const Dashboard = props => {
   console.log('Dashboard credentials', user_id);
   return (
     <div>
-      <h2>Dashboard Page</h2>
+      <h2>Dad Jokes List</h2>
       {jokes.map(joke => (
-        <Jokes
-          key={joke.id}
-          joke={joke}
-          deleteJoke={deleteJoke}
-          editing={editing}
-          editJoke={editJoke}
-          saveEdit={saveEdit}
-          jokeToEdit={jokeToEdit}
-          setJokeToEdit={setJokeToEdit}
-        />
+        <Jokes key={joke.id} joke={joke} deleteJoke={deleteJoke} />
       ))}
-      {editing && (
-        <form onSubmit={saveEdit}>
-          <legend>edit joke</legend>
-          <input
-            type="text"
-            onChange={e =>
-              setJokeToEdit({ ...jokeToEdit, joke: e.target.value })
-            }
-            value={jokeToEdit.joke}
-          />
-          <input
-            type="text"
-            onChange={e =>
-              setJokeToEdit({ ...jokeToEdit, punchline: e.target.value })
-            }
-            value={jokeToEdit.punchline}
-          />
-          <div>
-            <button type="submit">
-              save
-            </button>
-            <button onClick={() => setEditing(false)}>cancel</button>
-          </div>
-        </form>
-      )}
-      <br />
       <form onSubmit={addJoke}>
         <legend>add joke</legend>
         <input

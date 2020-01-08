@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import PrivateRoute from './components/PrivateRoute';
 import Dashboard from './components/Dashboard';
+import AddJoke from './components/AddJoke';
 
 // Contexts
 import { JokeContext } from '../src/contexts/JokeContext';
@@ -27,9 +28,9 @@ function App() {
         <LoginContext.Provider value={{ credentials, setCredentials }}>
           <JokeContext.Provider value={{ jokes, setJokes }}>
             <Header />
-            <h1>Dad Jokes 4.0</h1>
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/addjoke" component={AddJoke} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
             </Switch>
