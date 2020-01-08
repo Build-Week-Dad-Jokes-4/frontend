@@ -22,7 +22,8 @@ const Login = props => {
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('user_id', credentials.username);
         setCredentials({ username: '', password: '' });
-        props.history.push('/dashboard');
+        // props.history.push('/dashboard');
+        props.history.goBack();
       })
       .catch(err => console.log(err));
   };

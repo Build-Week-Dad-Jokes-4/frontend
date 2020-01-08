@@ -1,4 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { Container } from 'reactstrap'
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Components
 import Jokes from './Jokes';
@@ -62,20 +67,24 @@ const Dashboard = props => {
   console.log('List of jokes', jokes);
   console.log('Dashboard credentials', user_id);
   return (
-    <div>
+    <Container>
       <h2>Dad Jokes List</h2>
+      <div>
+        <FontAwesomeIcon icon={faPlusCircle} /> Add joke
+      </div>
+      <p>* click joke to edit</p>
       {jokes.map(joke => (
         <Jokes key={joke.id} joke={joke} deleteJoke={deleteJoke} />
       ))}
       <form onSubmit={addJoke}>
         <legend>add joke</legend>
-        <input
+        <textarea
           type="text"
           onChange={e => setJokeToAdd({ ...jokeToAdd, joke: e.target.value })}
           placeholder="add joke"
           value={jokeToAdd.joke}
         />
-        <input
+        <textarea
           type="text"
           onChange={e =>
             setJokeToAdd({ ...jokeToAdd, punchline: e.target.value })
@@ -84,8 +93,9 @@ const Dashboard = props => {
           value={jokeToAdd.punchline}
         />
         <button type="submit">add joke</button>
+
       </form>
-    </div>
+    </Container>
   );
 };
 
