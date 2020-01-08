@@ -35,7 +35,7 @@ export default function Card (props) {
         <Box className = "Body">
         <img src={logo} className="App-logo" alt="logo" />
         <h3>{props.joke}</h3>
-        <button type = 'button' onClick = {clickHandler}>{toggle ? 'click for answer': props.punchline}</button>
+        <button type = 'button' onClick = {clickHandler}>{toggle ? 'click for answers': props.punchline}</button>
         </Box>
     )
 }
