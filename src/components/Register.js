@@ -23,7 +23,7 @@ const Register = props => {
         localStorage.setItem('token', res.data.password);
         localStorage.setItem('user_id', credentials.username);
         setCredentials({ username: '', password: '' });
-        props.history.push('/dashboard');
+        props.history.push('/jokelist');
       })
       .catch(err => console.log(err));
   };
