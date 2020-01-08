@@ -4,11 +4,7 @@ import Axios from 'axios';
 import Card from './Card';
 
 
-let Header = styled.header`
-    text-align:center
 
-
-`;
 
 
 
@@ -22,7 +18,7 @@ export default function QuestionCard() {
 
         Axios.get(`https://be-dad-jokes.herokuapp.com/api/jokes`)
             .then(Response => {
-                console.log(Response.data);                
+                              
                 setJoke(Response.data);
                 return setJoke;
 
@@ -40,11 +36,19 @@ export default function QuestionCard() {
     const clickHandleNext = () => {
         console.log(elem);
         setElem(elem + 1);
+        console.log(joke.length);
+        if(elem === joke.length - 1){
+            setElem(0);
+        }
 
     }
     const clickHandleBack = () => {
         console.log(elem);
+        console.log(joke.length);
         setElem(elem - 1);
+        if(elem < joke.length-(joke.length-1)){
+            setElem(0);
+        }
 
     }
 
@@ -59,7 +63,7 @@ export default function QuestionCard() {
 
                 {joke.map((value, index) => {
 
-                    if (index == elem) {
+                    if (index === elem) {
 
 
                         return (
@@ -77,6 +81,7 @@ export default function QuestionCard() {
 
                     }
                     console.log(elem);
+                    
 
                 })}
 
