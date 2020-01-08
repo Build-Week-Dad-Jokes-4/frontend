@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
 
+// Contexts
+import { LoginContext } from '../contexts/LoginContext';
+
 const Register = props => {
-  const [register, setRegister] = useState({
-    username: '',
-    password: '',
-    // headers: {
-    //   'Content-Type': 'application/json'
-    // }
-  });
+  const { credentials, setCredentials } = useContext(LoginContext);
 
   const handleChange = e => {
-    setRegister({
-      ...register,
+    setCredentials({
+      ...credentials,
       [e.target.name]: e.target.value
     });
   };
@@ -20,31 +17,33 @@ const Register = props => {
   const registerUser = e => {
     e.preventDefault();
     axios
-      .post('https://be-dad-jokes.herokuapp.com/api/auth/register', register)
+      .post('https://be-dad-jokes.herokuapp.com/api/auth/register', credentials)
       .then(res => {
         console.log('Register', res);
         localStorage.setItem('token', res.data.password);
+        localStorage.setItem('user_id', credentials.username);
+        setCredentials({ username: '', password: '' });
         props.history.push('/dashboard');
       })
       .catch(err => console.log(err));
   };
-  console.log(register);
+  console.log(credentials);
   return (
     <>
-      <h2>Register for Account</h2>
+      <h2>Register for an Account</h2>
       <form onSubmit={registerUser}>
         <input
           type="text"
           name="username"
           placeholder="Username"
-          value={register.username}
+          value={credentials.username}
           onChange={handleChange}
         />
         <input
           type="password"
           name="password"
           placeholder="Password"
-          value={register.password}
+          value={credentials.password}
           onChange={handleChange}
         />
         <button>Create account</button>
