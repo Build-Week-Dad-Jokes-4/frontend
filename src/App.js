@@ -8,6 +8,9 @@ import Register from './components/Register';
 import PrivateRoute from './components/PrivateRoute';
 import Dashboard from './components/Dashboard';
 import AddJoke from './components/AddJoke';
+import Footer from './components/Footer';
+import Welcome from './components/HomePage';
+import QuestionCard from './components/CardHandler';
 
 // Contexts
 import { JokeContext } from '../src/contexts/JokeContext';
@@ -28,12 +31,17 @@ function App() {
         <LoginContext.Provider value={{ credentials, setCredentials }}>
           <JokeContext.Provider value={{ jokes, setJokes }}>
             <Header />
+            <Route exact path = '/' component = {Welcome}/>
+            <Route  path = '/Contact'/>
+            <Route path = '/Login'/>
+            <Route path = '/Jokes' component = {QuestionCard}/>
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/addjoke" component={AddJoke} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
             </Switch>
+            <Footer/>
           </JokeContext.Provider>
         </LoginContext.Provider>
       </div>
