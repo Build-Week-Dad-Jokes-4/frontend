@@ -1,4 +1,16 @@
 import React, { useState, useContext } from 'react';
+import {
+  Card,
+  CardText,
+  CardBody,
+  Button,
+  InputGroup,
+  Input,
+  Row,
+  Col
+} from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 // Context
 import { JokeContext } from '../contexts/JokeContext';
@@ -6,11 +18,11 @@ import { JokeContext } from '../contexts/JokeContext';
 // Authentication
 import { axiosWithAuth } from '../axiosWithAuth';
 
-const Jokes = ({ joke, deleteJoke,}) => {
-
+const Jokes = ({ joke, deleteJoke }) => {
   const { jokes, setJokes } = useContext(JokeContext);
   const [toggleEdit, setToggleEdit] = useState(false);
   const [jokeToEdit, setJokeToEdit] = useState({});
+  const [animateEdit, setAnimateEdit] = useState(false);
 
   const saveEdit = e => {
     e.preventDefault();
@@ -41,49 +53,61 @@ const Jokes = ({ joke, deleteJoke,}) => {
 
   return (
     <div>
-      <div>
-        <div>Joke: {joke.joke}</div>
-        <div>Punchline: {joke.punchline}</div>
-        <button
-          onClick={() => {
-            editJoke(joke);
-            setToggleEdit(true);
-          }}
-        >
-          Edit
-        </button>
-        <button
-          onClick={e => {
-            e.stopPropagation();
-            deleteJoke(joke.id);
-          }}
-        >
-          Delete
-        </button>
-      </div>
-      {toggleEdit && (
-        <form className="animated fadeIn" onSubmit={saveEdit}>
-          <legend>edit joke</legend>
-          <input
-            type="text"
-            onChange={e =>
-              setJokeToEdit({ ...jokeToEdit, joke: e.target.value })
-            }
-            value={jokeToEdit.joke}
+      <Row>
+        <Col lg="11">
+          <Card>
+            <CardBody
+              onClick={() => {
+                editJoke(joke);
+                setToggleEdit(!toggleEdit);
+                setAnimateEdit(!animateEdit);
+              }}
+            >
+              <CardText>
+                <strong>Joke: </strong>
+                {joke.joke}
+              </CardText>
+              <CardText>
+                <strong>Punchline: </strong>
+                {joke.punchline}
+              </CardText>
+            </CardBody>
+            {toggleEdit && (
+              <form className="animated fadeIn" onSubmit={saveEdit}>
+                <p>edit</p>
+                <Input
+                  type="text"
+                  onChange={e =>
+                    setJokeToEdit({ ...jokeToEdit, joke: e.target.value })
+                  }
+                  value={jokeToEdit.joke}
+                />
+                <Input
+                  type="text"
+                  onChange={e =>
+                    setJokeToEdit({ ...jokeToEdit, punchline: e.target.value })
+                  }
+                  value={jokeToEdit.punchline}
+                />
+                <div>
+                  <Button type="submit">Update</Button>
+                  <Button onClick={() => setToggleEdit(false)}>Cancel</Button>
+                </div>
+              </form>
+            )}
+          </Card>
+        </Col>
+        <Col lg="1" className="align-self-center align-content-start">
+          <FontAwesomeIcon
+            className="text-danger"
+            icon={faTrash}
+            onClick={e => {
+              e.stopPropagation();
+              deleteJoke(joke.id);
+            }}
           />
-          <input
-            type="text"
-            onChange={e =>
-              setJokeToEdit({ ...jokeToEdit, punchline: e.target.value })
-            }
-            value={jokeToEdit.punchline}
-          />
-          <div>
-            <button type="submit">Update</button>
-            <button onClick={() => setToggleEdit(false)}>Cancel</button>
-          </div>
-        </form>
-      )}
+        </Col>
+      </Row>
     </div>
   );
 };

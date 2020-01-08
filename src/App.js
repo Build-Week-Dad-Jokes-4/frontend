@@ -6,7 +6,7 @@ import Header from './components/Header';
 import Login from './components/Login';
 import Register from './components/Register';
 import PrivateRoute from './components/PrivateRoute';
-import Dashboard from './components/Dashboard';
+import JokeList from './components/JokeList';
 import AddJoke from './components/AddJoke';
 import Footer from './components/Footer';
 import Welcome from './components/HomePage';
@@ -33,10 +33,10 @@ function App() {
             <Header />
             <Route exact path = '/' component = {Welcome}/>
             <Route  path = '/Contact'/>
-            <Route path = '/Login'/>
+            {/* <Route path = '/Login'/> */}
             <Route path = '/Jokes' component = {QuestionCard}/>
             <Switch>
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/jokelist" component={JokeList} />
               <PrivateRoute exact path="/addjoke" component={AddJoke} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
