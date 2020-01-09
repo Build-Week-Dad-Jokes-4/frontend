@@ -5,9 +5,6 @@ import styled from 'styled-components';
 let Links = styled.div`
     display: flex;
     justify-content: space-around;
-    let Headers = styled.header;
-    
-    
 `;
 let Headers = styled.header`
     background-color: #A24558;
@@ -16,14 +13,9 @@ let Headers = styled.header`
       text-decoration: none;
       color: white;
     }
-    
-`;
+ `;
 
-let Text = styled.div`
 
-    
-    
-`;
 
 const Header = () => {
   return (
