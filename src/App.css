@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.add-icon {
+  color: #323d7d;
+  font-size: 30px;
+}
