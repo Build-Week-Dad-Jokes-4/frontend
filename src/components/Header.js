@@ -21,23 +21,23 @@ const Header = () => {
   return (
     <Headers className="ui centered">        
     <Links className='links'>
-      <Text className='link'>
+      <div className='link'>
         <Link to ="/">Home</Link>
-      </Text>
+      </div>
       <Text className='link'>
         <Link to="/Contact">Contact</Link>
-      </Text>
-      <Text className='link'>
+      </div>
+      <div className='link'>
           <Link to= "/login">Login</Link>
-      </Text>
-      <Text className='link'>
+      </div>
+      <div className='link'>
           <Link to= "/Jokes">Jokes</Link>
-      </Text>
-      <Text className='link'>
+      </div>
+      <div className='link'>
           <Link to= "/jokelist">Full List</Link>
-      </Text>      <Text className='link'>
+      </div>      <div className='link'>
           <Link to= "/register">Register Now</Link>
-      </Text>
+      </div>
     </Links>
   </Headers>
   )
