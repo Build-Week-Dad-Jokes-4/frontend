@@ -5,13 +5,24 @@ import styled from 'styled-components';
 let Links = styled.div`
     display: flex;
     justify-content: space-around;
-    margin-top: 40%;
+    
+    
+`;
+let Footers = styled.footer`
+    background-color: #A24558;
+    margin-top: 80%;   
+    padding-top: 5%;
+    
+    a{
+      text-decoration: none;
+      color: white;
+    }
     
 `;
  
 export default function Footer (){
     return (        
-        <footer>
+        <Footers>
             <Links className='links'>
             <div className='link'>
                 <Link to ="/">Home</Link>
@@ -26,7 +37,7 @@ export default function Footer (){
                 <Link to= "/Jokes">Jokes</Link>
             </div>
             </Links>
-        </footer>
+        </Footers>
         
     )
 }
