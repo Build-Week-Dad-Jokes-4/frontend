@@ -6,13 +6,18 @@ let Box = styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
-    width: 50%;
-    margin-left: 30%;
+    align-content: center;
+    width: 100%;    
     border: 5px solid black;
     background-color: #DFBC82;
+    
+
     button {
-        width: 50%
-        margin-left: 25%
+        margin-left: 20%;
+        margin-right: 20%;
+        width: 60%
+        
+        
     }
 `;
 

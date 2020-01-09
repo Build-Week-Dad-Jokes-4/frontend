@@ -17,6 +17,11 @@ import { JokeContext } from '../src/contexts/JokeContext';
 import { LoginContext } from '../src/contexts/LoginContext';
 
 import './App.css';
+import styled from 'styled-components';
+
+let Apps = styled.div`
+    background-color: #E3DFC9;
+`;
 
 function App() {
   const [jokes, setJokes] = useState([]);
@@ -27,7 +32,7 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
+      <Apps className="App">
         <LoginContext.Provider value={{ credentials, setCredentials }}>
           <JokeContext.Provider value={{ jokes, setJokes }}>
             <Header />
@@ -41,10 +46,12 @@ function App() {
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
             </Switch>
-            <Footer/>
+            
           </JokeContext.Provider>
         </LoginContext.Provider>
-      </div>
+        <Footer/>
+      </Apps>
+      
     </Router>
   );
 }
