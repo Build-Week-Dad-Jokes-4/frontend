@@ -4,10 +4,11 @@ import {
   CardText,
   CardBody,
   Button,
-  InputGroup,
   Input,
   Row,
-  Col
+  Col,
+  Form,
+  FormGroup
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -38,7 +39,7 @@ const Jokes = ({ joke, deleteJoke }) => {
         console.log('editJoke filterEditJoke', filterEditJoke);
         setJokes(
           [...filterEditJoke, res.data[0]].sort(
-            (a, b) => parseFloat(a.id) - parseFloat(b.id)
+            (a, b) => parseFloat(b.id) - parseFloat(a.id)
           )
         );
         setJokeToEdit({ joke: '', punchline: '' });
@@ -52,7 +53,7 @@ const Jokes = ({ joke, deleteJoke }) => {
   };
 
   return (
-    <div>
+    <div className="mb-1 animated fadeInDown">
       <Row>
         <Col lg="11">
           <Card>
@@ -73,31 +74,41 @@ const Jokes = ({ joke, deleteJoke }) => {
               </CardText>
             </CardBody>
             {toggleEdit && (
-              <form className="animated fadeIn" onSubmit={saveEdit}>
+              <Form className="animated fadeIn mt-3 mx-3" onSubmit={saveEdit}>
                 <p>edit</p>
-                <Input
-                  type="text"
-                  onChange={e =>
-                    setJokeToEdit({ ...jokeToEdit, joke: e.target.value })
-                  }
-                  value={jokeToEdit.joke}
-                />
-                <Input
-                  type="text"
-                  onChange={e =>
-                    setJokeToEdit({ ...jokeToEdit, punchline: e.target.value })
-                  }
-                  value={jokeToEdit.punchline}
-                />
-                <div>
-                  <Button type="submit">Update</Button>
-                  <Button onClick={() => setToggleEdit(false)}>Cancel</Button>
+                <FormGroup>
+                  <Input
+                    type="text"
+                    id="editJoke"
+                    onChange={e =>
+                      setJokeToEdit({ ...jokeToEdit, joke: e.target.value })
+                    }
+                    value={jokeToEdit.joke}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Input
+                    type="text"
+                    onChange={e =>
+                      setJokeToEdit({
+                        ...jokeToEdit,
+                        punchline: e.target.value
+                      })
+                    }
+                    value={jokeToEdit.punchline}
+                  />
+                </FormGroup>
+                <div className="my-3">
+                  <Button color="primary" type="submit">
+                    Update
+                  </Button>{' '}
+                  <Button color="warning" onClick={() => setToggleEdit(!toggleEdit)}>Cancel</Button>
                 </div>
-              </form>
+              </Form>
             )}
           </Card>
         </Col>
-        <Col lg="1" className="align-self-center align-content-start">
+        <Col lg="1" className="align-self-center">
           <FontAwesomeIcon
             className="text-danger"
             icon={faTrash}
