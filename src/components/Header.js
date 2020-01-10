@@ -34,7 +34,7 @@ const Header = () => {
           <Link to= "/Jokes">Jokes</Link>
       </div>
       <div className='link'>
-          <Link to= "/jokelist">Full List</Link>
+          <Link to= "/jokelist">Full List (Registered-users)</Link>
       </div>      <div className='link'>
           <Link to= "/register">Register Now</Link>
       </div>
