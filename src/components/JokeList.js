@@ -9,7 +9,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Jokes from './Jokes';
 
 // Contexts
-// import { LoginContext } from '../contexts/LoginContext';
 import { JokeContext } from '../contexts/JokeContext';
 
 // Authentication
@@ -32,7 +31,7 @@ const Dashboard = props => {
       .get('https://be-dad-jokes.herokuapp.com/api/jokes')
       .then(res => {
         console.log('Dashboard res', res.data);
-        setJokes(res.data.sort((a, b) => parseFloat(a.id) - parseFloat(b.id)));
+        setJokes(res.data.sort((a, b) => parseFloat(b.id) - parseFloat(a.id)));
       })
       .catch(err => console.log(err));
   }, [setJokes, jokeToAdd]);

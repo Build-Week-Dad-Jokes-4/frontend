@@ -39,7 +39,7 @@ const Jokes = ({ joke, deleteJoke }) => {
         console.log('editJoke filterEditJoke', filterEditJoke);
         setJokes(
           [...filterEditJoke, res.data[0]].sort(
-            (a, b) => parseFloat(a.id) - parseFloat(b.id)
+            (a, b) => parseFloat(b.id) - parseFloat(a.id)
           )
         );
         setJokeToEdit({ joke: '', punchline: '' });
@@ -53,7 +53,7 @@ const Jokes = ({ joke, deleteJoke }) => {
   };
 
   return (
-    <div className="mb-1">
+    <div className="mb-1 animated fadeInDown">
       <Row>
         <Col lg="11">
           <Card>
