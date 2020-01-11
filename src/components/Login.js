@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import axios from 'axios';
+import { Container, Form, Input, Button } from 'reactstrap'
 
 // Contexts
 import { LoginContext } from '../contexts/LoginContext';
@@ -30,27 +31,30 @@ const Login = props => {
 
   return (
     <>
-      <h2>Welcome to the Login Page</h2>
-      <form onSubmit={login}>
-        <input
+      <h2 className="mt-4">Welcome to the Login Page</h2>
+      <Container className="w-25 mt-5">
+
+      <Form className="" onSubmit={login}>
+        <Input
           type="text"
           name="username"
           placeholder="Username"
           value={credentials.username}
           onChange={handleChange}
         />
-        <input
+        <Input
           type="password"
           name="password"
           placeholder="Password"
           value={credentials.password}
           onChange={handleChange}
         />
-        <button>Login</button>
+        <Button color="primary" className="mt-3">Login</Button>
         {/* <div>
           <button>Need an account? Click here</button>
         </div> */}
-      </form>
+      </Form>
+      </Container>
     </>
   );
 };
