@@ -11,7 +11,11 @@ import {
   FormGroup
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTrash,
+  faThumbsUp,
+  faThumbsDown
+} from '@fortawesome/free-solid-svg-icons';
 
 // Context
 import { JokeContext } from '../contexts/JokeContext';
@@ -73,6 +77,13 @@ const Jokes = ({ joke, deleteJoke }) => {
                 {joke.punchline}
               </CardText>
             </CardBody>
+            <div>
+              <FontAwesomeIcon icon={faThumbsUp} className="mr-2" />
+              <FontAwesomeIcon
+                icon={faThumbsDown}
+                className="ml-2 fa-flip-horizontal"
+              />
+            </div>
             {toggleEdit && (
               <Form className="animated fadeIn mt-3 mx-3" onSubmit={saveEdit}>
                 <p>edit</p>
@@ -102,7 +113,12 @@ const Jokes = ({ joke, deleteJoke }) => {
                   <Button color="primary" type="submit">
                     Update
                   </Button>{' '}
-                  <Button color="warning" onClick={() => setToggleEdit(!toggleEdit)}>Cancel</Button>
+                  <Button
+                    color="warning"
+                    onClick={() => setToggleEdit(!toggleEdit)}
+                  >
+                    Cancel
+                  </Button>
                 </div>
               </Form>
             )}
